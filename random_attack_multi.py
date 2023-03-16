@@ -18,8 +18,8 @@ NUM_PROCESS = 25
 
 if __name__ == "__main__":
 
-    from utils.random_attack_exp import random_shap_1_4_8_16_32
-    inputs = random_shap_1_4_8_16_32(
+    from utils.random_attack_exp import random_shap_1_4_8_16_32, random_random_1_4_8_16_32
+    inputs = random_random_1_4_8_16_32(
         model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT)
 
 
