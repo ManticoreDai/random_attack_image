@@ -11,9 +11,9 @@ model_name = "mnist_sep_act_m6_9628"
 model_path = f'./mnist_model/{model_name}.h5'
 
 # TOP_N_SHAP = 1
-N_IMG_EACH_ATTACK = 2000
-TOTAL_TIMEOUT = 10
-NUM_PROCESS = 1
+N_IMG_EACH_ATTACK = 20000
+TOTAL_TIMEOUT = 600
+NUM_PROCESS = 25
 # 
 
 if __name__ == "__main__":
