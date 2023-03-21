@@ -99,8 +99,8 @@ class RandomImageAttacker:
             for attack_pixel in self.attack_pixels:
                 row, col = attack_pixel
                 cur_value = img[row, col, 0]
-                lb = max(0, int(cur_value * (1-self.limit)))
-                ub = min(255, int(cur_value * (1+self.limit)))
+                lb = max(0, int(cur_value * (1-self.limit)) - 1)
+                ub = min(255, int(cur_value * (1+self.limit)) + 1) # if 0 can't change to any value
                 rand_val = np.random.randint(lb, ub)
                 
                 img[row, col, 0] = rand_val
