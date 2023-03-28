@@ -141,7 +141,7 @@ def random_random_1_4_8_16_32(model_name, model_path, first_n_img, N_IMG_EACH_AT
     return inputs
 
 
-### with limit
+### with limit 0.1
 def random_random_1_4_8_16_32_limit_01(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT):
     from utils.dataset import get_mnist_data
     from utils.gen_random_pixel_location import mnist_test_data_10000
@@ -206,3 +206,68 @@ def random_shap_1_4_8_16_32_limit_01(model_name, model_path, first_n_img, N_IMG_
 
     return inputs
 
+
+### with limit 10
+def random_random_1_4_8_16_32_limit_10(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT):
+    from utils.dataset import get_mnist_data
+    from utils.gen_random_pixel_location import mnist_test_data_10000
+
+    limit = 10
+    x_test, x_test_255 = get_mnist_data()
+
+    # random pixels location with fixed seed
+    rando_pixels = mnist_test_data_10000()
+
+    inputs = []
+    for ton_n in [1,4,8,16,32]:
+        for idx in range(first_n_img):
+            save_exp = {
+                "model_name": model_name,
+                "input_name": f"mnist_test_{idx}",
+                "exp_name": f"random/limit_{limit}/random_{ton_n}"
+            }
+
+            save_dir = get_save_dir_from_save_exp(save_exp)
+            if os.path.exists(save_dir):
+                # 已經有紀錄的圖跳過
+                continue
+
+            base_img = x_test_255[idx]
+            norm_img = x_test[[idx]]
+            attack_pixels = rando_pixels[idx, :ton_n, :2].tolist()
+            
+            one_input = (model_path, N_IMG_EACH_ATTACK, base_img.copy(), norm_img.copy(), attack_pixels, TOTAL_TIMEOUT, limit)
+            inputs.append((one_input, save_exp))
+
+    return inputs
+
+def random_shap_1_4_8_16_32_limit_10(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT):
+    from utils.dataset import get_mnist_data
+    limit = 10
+    x_test, x_test_255 = get_mnist_data()
+
+    ### SHAP
+    test_shap_pixel_sorted = np.load('./shap_value/mnist_sep_act_m6_9628/mnist_sort_shap_pixel.npy')
+
+    inputs = []
+    for ton_n_shap in [1,4,8,16,32]:
+        for idx in range(first_n_img):
+            save_exp = {
+                "model_name": model_name,
+                "input_name": f"mnist_test_{idx}",
+                "exp_name": f"random/limit_{limit}/shap_{ton_n_shap}"
+            }
+
+            save_dir = get_save_dir_from_save_exp(save_exp)
+            if os.path.exists(save_dir):
+                # 已經有紀錄的圖跳過
+                continue
+
+            base_img = x_test_255[idx]
+            norm_img = x_test[[idx]]
+            attack_pixels = test_shap_pixel_sorted[idx, :ton_n_shap, :2].tolist()
+            
+            one_input = (model_path, N_IMG_EACH_ATTACK, base_img.copy(), norm_img.copy(), attack_pixels, TOTAL_TIMEOUT, limit)
+            inputs.append((one_input, save_exp))
+
+    return inputs

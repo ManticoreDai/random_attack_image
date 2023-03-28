@@ -15,8 +15,17 @@ class RandomImageAttacker:
         self.original_img = original_img
         self.attack_pixels = attack_pixels
         self.total_timeout = total_timeout
-        self.limit = limit # example 0.1, [x*0.9, x*1.1]
-
+        
+        self.limit = limit
+        # example 0.1, [x*0.9, x*1.1]
+        # example 10, [x-10, x+10]
+        if limit is not None:
+            if type(limit) == float:
+                assert 0.0 <= limit <= 1.0
+            
+            if type(limit) == int:
+                assert 1 <= limit <= 255
+        
         self.recorder: RandomAttackRecorder = None
         self.iter = 0
         
@@ -99,8 +108,14 @@ class RandomImageAttacker:
             for attack_pixel in self.attack_pixels:
                 row, col = attack_pixel
                 cur_value = img[row, col, 0]
-                lb = max(0, int(cur_value * (1-self.limit)) - 1)
-                ub = min(255, int(cur_value * (1+self.limit)) + 1) # if 0 can't change to any value
+                
+                if type(self.limit) == float:
+                    lb = max(0, int(cur_value * (1-self.limit)) - 1)
+                    ub = min(255, int(cur_value * (1+self.limit)) + 1) # if 0 can't change to any value
+                elif type(self.limit) == int:
+                    lb = max(0, int(cur_value-self.limit))
+                    ub = min(255, int(cur_value+self.limit))
+                    
                 rand_val = np.random.randint(lb, ub)
                 
                 img[row, col, 0] = rand_val
