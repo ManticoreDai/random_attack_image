@@ -207,12 +207,11 @@ def random_shap_1_4_8_16_32_limit_01(model_name, model_path, first_n_img, N_IMG_
     return inputs
 
 
-### with limit 10
-def random_random_1_4_8_16_32_limit_10(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT):
+### with limit range +- N
+def random_random_1_4_8_16_32_limit(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit):
     from utils.dataset import get_mnist_data
     from utils.gen_random_pixel_location import mnist_test_data_10000
 
-    limit = 10
     x_test, x_test_255 = get_mnist_data()
 
     # random pixels location with fixed seed
@@ -241,9 +240,8 @@ def random_random_1_4_8_16_32_limit_10(model_name, model_path, first_n_img, N_IM
 
     return inputs
 
-def random_shap_1_4_8_16_32_limit_10(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT):
+def random_shap_1_4_8_16_32_limit(model_name, model_path, first_n_img, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit):
     from utils.dataset import get_mnist_data
-    limit = 10
     x_test, x_test_255 = get_mnist_data()
 
     ### SHAP
