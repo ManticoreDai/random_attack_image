@@ -21,10 +21,10 @@ if __name__ == "__main__":
     from utils.random_attack_exp import random_random_1_4_8_16_32_limit, random_shap_1_4_8_16_32_limit
     
     inputs = random_random_1_4_8_16_32_limit(
-        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=30)
+        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=70)
     
     inputs.extend(random_shap_1_4_8_16_32_limit(
-        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=30)
+        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=70)
     )
     
 
@@ -43,10 +43,11 @@ if __name__ == "__main__":
 
     running_processes = []
     for sub_tasks in all_subprocess_tasks:
-        p = Process(target=run_multi_attack, args=(sub_tasks, N_IMG_EACH_ATTACK, ))        
-        p.start()
-        running_processes.append(p)
-        time.sleep(2) # subprocess start 的間隔時間
+        if len(sub_tasks) > 0:
+            p = Process(target=run_multi_attack, args=(sub_tasks, N_IMG_EACH_ATTACK, ))        
+            p.start()
+            running_processes.append(p)
+            time.sleep(1) # subprocess start 的間隔時間
         
     for p in running_processes:
         p.join()
