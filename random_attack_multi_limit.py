@@ -7,7 +7,8 @@ import time
 from utils.random_attack_exp import run_multi_attack
 
 
-model_name = "mnist_sep_act_m6_9628"
+# model_name = "mnist_sep_act_m6_9628"
+model_name = "mnist_sep_act_m6_9653_noise"
 model_path = f'./mnist_model/{model_name}.h5'
 
 # TOP_N_SHAP = 1
