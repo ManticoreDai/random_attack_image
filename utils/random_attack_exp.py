@@ -223,7 +223,7 @@ def random_random_1_4_8_16_32_limit(model_name, model_path, first_n_img, N_IMG_E
             save_exp = {
                 "model_name": model_name,
                 "input_name": f"mnist_test_{idx}",
-                "exp_name": f"random/limit_{limit}/random_{ton_n}"
+                "exp_name": f"random/limit_{limit}_{N_IMG_EACH_ATTACK}/random_{ton_n}"
             }
 
             save_dir = get_save_dir_from_save_exp(save_exp)
@@ -253,7 +253,7 @@ def random_shap_1_4_8_16_32_limit(model_name, model_path, first_n_img, N_IMG_EAC
             save_exp = {
                 "model_name": model_name,
                 "input_name": f"mnist_test_{idx}",
-                "exp_name": f"random/limit_{limit}/shap_{ton_n_shap}"
+                "exp_name": f"random/limit_{limit}_{N_IMG_EACH_ATTACK}/shap_{ton_n_shap}"
             }
 
             save_dir = get_save_dir_from_save_exp(save_exp)

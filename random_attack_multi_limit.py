@@ -12,7 +12,7 @@ model_name = "mnist_sep_act_m6_9653_noise"
 model_path = f'./mnist_model/{model_name}.h5'
 
 # TOP_N_SHAP = 1
-N_IMG_EACH_ATTACK = 20000
+N_IMG_EACH_ATTACK = 1
 TOTAL_TIMEOUT = 600
 NUM_PROCESS = 25
 # 

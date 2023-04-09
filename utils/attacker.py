@@ -39,7 +39,7 @@ class RandomImageAttacker:
             attack_imgs = self._get_all_limit_img_multi_pixels()
                     
         original_atk_imgs = np.append(self.original_img, attack_imgs, axis=0)
-        all_attack_result = self.model.predict(original_atk_imgs).argmax(axis=1)
+        all_attack_result = self.model.predict(original_atk_imgs, verbose=0).argmax(axis=1)
         pred_label = all_attack_result[0]
 
         all_attack_result = all_attack_result[1:]
@@ -127,7 +127,7 @@ class RandomImageAttacker:
     
 
     def get_original_img_label(self):        
-        original_label = self.model.predict(self.original_img).argmax(axis=1)[0]
+        original_label = self.model.predict(self.original_img, verbose=0).argmax(axis=1)[0]
         original_label = int(original_label)
         return original_label
 
