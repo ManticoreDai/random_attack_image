@@ -52,7 +52,8 @@ class RandomImageAttacker:
         
         if is_attack_success:
             atk_label = int(tmp[0])
-            atk_img = attack_imgs[atk_label]
+            atk_idx = np.where(all_attack_result==atk_label)[0][0]
+            atk_img = attack_imgs[atk_idx]
         
         self.recorder.iter_end()
         return is_attack_success, atk_label, atk_img
