@@ -14,7 +14,7 @@ model_path = f'./mnist_model/{model_name}.h5'
 # TOP_N_SHAP = 1
 N_IMG_EACH_ATTACK = 1
 TOTAL_TIMEOUT = 600
-NUM_PROCESS = 100
+NUM_PROCESS = 25
 # 
 
 if __name__ == "__main__":
@@ -22,10 +22,10 @@ if __name__ == "__main__":
     from utils.random_attack_exp import random_random_1_4_8_16_32_limit, random_shap_1_4_8_16_32_limit
     
     inputs = random_random_1_4_8_16_32_limit(
-        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=70)
+        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=10)
     
     inputs.extend(random_shap_1_4_8_16_32_limit(
-        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=70)
+        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=10)
     )
     
 
