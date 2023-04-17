@@ -14,7 +14,7 @@ model_path = f'./mnist_model/{model_name}.h5'
 # TOP_N_SHAP = 1
 N_IMG_EACH_ATTACK = 1
 TOTAL_TIMEOUT = 600
-NUM_PROCESS = 25
+NUM_PROCESS = 100
 # 
 
 if __name__ == "__main__":
