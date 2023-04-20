@@ -21,11 +21,11 @@ if __name__ == "__main__":
 
     from utils.random_attack_exp import random_random_1_4_8_16_32_limit, random_shap_1_4_8_16_32_limit
     
-    inputs = random_random_1_4_8_16_32_limit(
-        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=10)
+    inputs = random_shap_1_4_8_16_32_limit(
+        model_name, model_path, 10000, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=10)
     
-    inputs.extend(random_shap_1_4_8_16_32_limit(
-        model_name, model_path, 400, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=10)
+    inputs.extend(random_random_1_4_8_16_32_limit(
+        model_name, model_path, 10000, N_IMG_EACH_ATTACK, TOTAL_TIMEOUT, limit=10)
     )
     
 
